@@ -1,15 +1,21 @@
 {
-  "name": "nodesendcliente",
+  "name": "adlersendcliente",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "export": "next export"
   },
   "dependencies": {
+    "axios": "^0.19.2",
+    "formik": "^2.1.4",
     "next": "9.4.4",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "react-dropzone": "^11.0.1",
+    "react-spinkit": "^3.0.0",
+    "yup": "^0.29.1"
   }
 }
