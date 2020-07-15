@@ -1,6 +1,6 @@
 module.exports = {
     env: {
-        backendURL: 'https://adlersend.firebaseapp.com',
+        backendURL: 'http://send.adlerstein.com.ar/b',
         frontendURL: 'https://adlersend.vercel.app/'
     }
 }
