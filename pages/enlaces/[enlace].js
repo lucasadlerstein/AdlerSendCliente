@@ -9,6 +9,7 @@ export async function getServerSideProps({params}) {
     const resultado = await clienteAxios.get(`/api/enlaces/${enlace}`);
 
     return {
+        revalidate: 1,
         props: {
             enlace: resultado.data
         }
@@ -23,7 +24,7 @@ export async function getServerSidePaths() {
         paths: enlaces.data.enlaces.map( enlace => ({ // Aca va un array con los SLUGS
             params: { enlace: enlace.url }
         })),
-        fallback: false // False da error 404 y true te muestra otra cosa
+        fallback: true // False da error 404 y true te muestra otra cosa
     }
 }
 
