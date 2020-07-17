@@ -4,7 +4,7 @@ import Layout from '../../components/Layout';
 import clienteAxios from '../../config/axios';
 import appContext from '../../context/app/appContext';
 
-export async function getStaticProps({params}) {
+export async function getServerSideProps({params}) {
     const {enlace} = params;
     const resultado = await clienteAxios.get(`/api/enlaces/${enlace}`);
 
@@ -17,7 +17,7 @@ export async function getStaticProps({params}) {
 }
 
 // Generar un enlace por cada slug
-export async function getStaticPaths() {
+export async function getServerSidePaths() {
     const enlaces = await clienteAxios.get('/api/enlaces');
     const paths = enlaces.data.enlaces.map( enlace => ({
         // Aca va un array con los SLUGS
