@@ -4,7 +4,7 @@ import Layout from '../../components/Layout';
 import clienteAxios from '../../config/axios';
 import appContext from '../../context/app/appContext';
 
-export async function getStaticProps({params}) {
+export async function getServerSideProps({params}) {
     const {enlace} = params;
     const resultado = await clienteAxios.get(`/api/enlaces/${enlace}`);
 
