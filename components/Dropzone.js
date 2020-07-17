@@ -14,11 +14,13 @@ const DropZone = () => {
     const AuthContext = useContext(authContext);
     const {usuario, autenticado} = AuthContext;
 
+    let pesoMaximo = 1024*1024*10;
+    
     useEffect(()=> {
         if(autenticado) {
-            const pesoMaximo = 1024*1024*1536;
+            pesoMaximo = 1024*1024*1536;
         } else {
-            const pesoMaximo = 1024*1024*10;
+            pesoMaximo = 1024*1024*10;
         }
     }, [autenticado]);
 
