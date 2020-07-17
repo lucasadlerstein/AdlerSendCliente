@@ -12,7 +12,7 @@ export async function getServerSidePaths() {
         paths: enlaces.data.enlaces.map( enlace => ({ // Aca va un array con los SLUGS
             params: { enlace: enlace.url }
         })),
-        fallback: true // False da error 404 y true te muestra otra cosa
+        fallback: false // False da error 404 y true te muestra otra cosa
     }
 }
 
@@ -24,8 +24,7 @@ export async function getServerSideProps({params}) {
         revalidate: 1,
         props: {
             enlace: resultado.data
-        },
-        unstable_revalidate: 10
+        }
     }
 }
 
@@ -89,4 +88,3 @@ export default ({enlace}) => {
     )
 
 }
-
