@@ -6,7 +6,7 @@ import appContext from '../../context/app/appContext';
 import {useRouter} from 'next/router';
 
 // Generar un enlace por cada slug
-export async function getServerSidePaths() {
+export async function getStaticPaths() {
     const enlaces = await clienteAxios.get('/api/enlaces');
     const paths = enlaces.data.enlaces.map( enlace => ({
         // Aca va un array con los SLUGS
