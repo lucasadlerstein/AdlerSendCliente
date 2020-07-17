@@ -3,18 +3,7 @@ import Alerta from '../../components/Alerta';
 import Layout from '../../components/Layout';
 import clienteAxios from '../../config/axios';
 import appContext from '../../context/app/appContext';
-
-export async function getServerSideProps({params}) {
-    const {enlace} = params;
-    const resultado = await clienteAxios.get(`/api/enlaces/${enlace}`);
-
-    return {
-        props: {
-            enlace: resultado.data
-        },
-        unstable_revalidate: 60
-    }
-}
+import {useRouter} from 'next/router';
 
 // Generar un enlace por cada slug
 export async function getServerSidePaths() {
@@ -26,7 +15,26 @@ export async function getServerSidePaths() {
     return { paths, fallback: true }
 }
 
+export async function getStaticProps({params}) {
+    const {enlace} = params;
+    const resultado = await clienteAxios.get(`/api/enlaces/${enlace}`);
+
+    return {
+        props: {
+            enlace: resultado.data
+        },
+        unstable_revalidate: 60
+    }
+}
+
 export default ({enlace}) => {
+
+    const router = useRouter();
+    if (router.isFallback) {
+      return (
+        <div>Cargando...</div>
+      )
+    }
 
     const AppContext = useContext(appContext);
     const {mostrarAlerta, mensaje_archivo} = AppContext;
