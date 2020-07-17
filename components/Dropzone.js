@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useEffect} from 'react';
+import React, {useCallback, useContext} from 'react';
 import {useDropzone} from 'react-dropzone';
 // import clienteAxios from '../config/axios';
 import appContext from '../context/app/appContext';
@@ -13,16 +13,6 @@ const DropZone = () => {
 
     const AuthContext = useContext(authContext);
     const {usuario, autenticado} = AuthContext;
-
-    let pesoMaximo = 1024*1024*10;
-    
-    useEffect(()=> {
-        if(autenticado) {
-            pesoMaximo = 1024*1024*1536;
-        } else {
-            pesoMaximo = 1024*1024*10;
-        }
-    }, [autenticado]);
 
     const onDropRejected = () => {
         if(autenticado) {
@@ -39,8 +29,10 @@ const DropZone = () => {
         subirArchivo(formData, acceptedFiles[0].path);
     }, []);
 
+    const maxSize = autenticado ? 1024*1024*1536 : 1024*1024*10;
+
     // Extrar contenido de dropzone
-    const {getInputProps, getRootProps, isDragActive, acceptedFiles } = useDropzone({onDropAccepted, onDropRejected, maxSize: pesoMaximo});
+    const {getInputProps, getRootProps, isDragActive, acceptedFiles } = useDropzone({onDropAccepted, onDropRejected, maxSize });
 
     const archivos = acceptedFiles.map( archivo => (
         <li key={archivo.lastModified} className="bg-white flex-1 mb-4 p-3 shadow-lg rounded">
