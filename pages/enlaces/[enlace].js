@@ -17,7 +17,7 @@ export async function getServerSideProps({params}) {
 }
 
 // Generar un enlace por cada slug
-export async function getStaticPaths() {
+export async function getServerSidePaths() {
     const enlaces = await clienteAxios.get('/api/enlaces');
     const paths = enlaces.data.enlaces.map( enlace => ({
         // Aca va un array con los SLUGS
