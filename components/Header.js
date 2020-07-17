@@ -34,7 +34,7 @@ const Header = () => {
             <img
                 onClick={() => redireccionInicio()}
                 className="w-64 mb-8 md:mb-0 cursor-pointer"
-                src="adlersend.png"
+                src="/adlersend.png"
                 alt="Adlersend, enviá lo que quieras con limites." />
 
             {usuario ? (
