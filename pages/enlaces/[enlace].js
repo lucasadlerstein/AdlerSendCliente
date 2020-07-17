@@ -5,27 +5,27 @@ import clienteAxios from '../../config/axios';
 import appContext from '../../context/app/appContext';
 
 // Generar un enlace por cada slug
-export async function getServerSidePaths() {
+export async function getStaticPaths() {
     const enlaces = await clienteAxios.get('/api/enlaces');
-
+    const paths = enlaces.data.enlaces.map( enlace => ({
+        // Aca va un array con los SLUGS
+        params: { enlace: enlace.url }
+    })),
     return {
-        paths: enlaces.data.enlaces.map( enlace => ({ // Aca va un array con los SLUGS
-            params: { enlace: enlace.url }
-        })),
+        paths,
         fallback: true // False da error 404 y true te muestra otra cosa
     }
 }
 
-export async function getServerSideProps({params}) {
+export async function getStaticProps({params}) {
     const {enlace} = params;
     const resultado = await clienteAxios.get(`/api/enlaces/${enlace}`);
 
     return {
-        revalidate: 1,
         props: {
             enlace: resultado.data
         },
-        unstable_revalidate: 10
+        unstable_revalidate: 60
     }
 }
 
